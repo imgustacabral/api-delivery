@@ -1,5 +1,6 @@
 import { Product } from '../../entities/product';
 import { ProductsRepository } from '../..//repositories/products.repository';
+import { Injectable } from '@nestjs/common';
 
 interface CreateProductRequest {
   name: string;
@@ -10,6 +11,7 @@ interface CreateProductResponse {
   product: Product;
 }
 
+@Injectable()
 export class CreateProduct {
   constructor(private readonly productsRepository: ProductsRepository) {}
   async execute(request: CreateProductRequest): Promise<CreateProductResponse> {

@@ -8,7 +8,6 @@ describe('Create Product', () => {
     const createProduct = new CreateProduct(productsRepository);
 
     await createProduct.execute(makeProduct());
-
     expect(productsRepository.products).toHaveLength(1);
   });
 });
