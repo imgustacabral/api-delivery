@@ -31,6 +31,7 @@ describe('Order', () => {
       products: [makeProduct(), makeProduct()],
     });
 
+    expect(order).toBeTruthy;
     expect(order.products).toHaveLength(2);
   });
 });
