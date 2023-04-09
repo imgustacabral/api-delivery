@@ -1,18 +1,27 @@
 import { randomUUID } from 'node:crypto';
-import { IProduct } from './product';
+import { Product } from './product';
 import { Recipient } from './recipient';
 import { Sender } from './sender';
 
 export interface IOrder {
   sender: Sender;
   recipient: Recipient;
-  products: IProduct[];
+  products: Product[];
 }
 
 export class Order {
   private props: IOrder;
   private _id: string;
+
+  private validateProductQuantity(products: Product[]) {
+    return products.length > 0;
+  }
   constructor(props: IOrder, id?: string) {
+    const isValidProductQuantity = this.validateProductQuantity(props.products);
+
+    if (!isValidProductQuantity) {
+      throw new Error('An order should have at least one product');
+    }
     this.props = { ...props };
     this._id = id ?? randomUUID();
   }

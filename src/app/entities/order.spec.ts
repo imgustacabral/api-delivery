@@ -4,7 +4,7 @@ import { makeRecipient } from '../../../test/factories/recipient.factory';
 import { Order } from './order';
 
 describe('Order', () => {
-  it('should be able to create a Order', () => {
+  it('should be able to create a order', () => {
     const order = new Order({
       sender: makeSender(),
       recipient: makeRecipient(),
@@ -14,7 +14,17 @@ describe('Order', () => {
     expect(order).toBeTruthy;
   });
 
-  it('should be able to create a Order with more than one product', () => {
+  it('should not be able to create a order without a product', () => {
+    expect(() => {
+      new Order({
+        sender: makeSender(),
+        recipient: makeRecipient(),
+        products: [],
+      });
+    }).toThrow();
+  });
+
+  it('should be able to create a order with more than one product', () => {
     const order = new Order({
       sender: makeSender(),
       recipient: makeRecipient(),
